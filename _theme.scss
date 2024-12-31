@@ -1,2 +1,7 @@
 @theme {
+  --color-muted: var(--color-gray-400);
+
+  --breakpoint-mobile: 300px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-laptop: 1024px;
 }

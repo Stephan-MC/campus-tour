@@ -1,0 +1,116 @@
+<div class="h-screen w-screen bg-cyan-300 relative">
+  <div class="size-full" id="map"></div>
+  <nav class="absolute top-0 inset-x-0 mt-4">
+    <div
+      class="relative bg-white rounded flex gap-4 items-center mx-2 px-2 py-1"
+    >
+      <i
+        (click)="menu =! menu"
+        class="icon-[mdi--menu] text-black shrink-0 cursor-pointer"
+        role="button"
+        aria-hidden="true"
+      ></i>
+      <div
+        [ngClass]="{ 'flex flex-1 items-center gap-2 rounded px-2 py-1 ': true, 'border-transparent': !searching, ' border-gray-400/30 focus-within:outline border': searching }"
+      >
+        <input
+          class="flex-1 bg-transparent focus:outline-hidden"
+          [@search]="searching ? 'open' : 'close'"
+          [(ngModel)]="search"
+          (input)="handleSearch()"
+          #searchLocationRef
+        />
+        <i
+          (click)="[searching = !searching, searchLocationRef?.focus()]"
+          class="icon-[mdi--magnify] shrink-0"
+          role="img"
+          aria-hidden="true"
+        ></i>
+      </div>
+
+      @if (showComboBox()) {
+      <div class="absolute top-[110%] inset-x-0 px-1" #comboBoxRef>
+        <div class="bg-white p-1 px-2 rounded space-y-2">
+          @for(location of filteredLocations(); track $index) {
+          <div class="flex gap-2 items-center">
+            @switch (location.type) { @case ('canteen') {
+            <i
+              (click)="[searching = !searching, searchLocationRef?.focus()]"
+              class="icon-[mdi--restaurant] shrink-0 text-red-400"
+              role="img"
+              aria-hidden="true"
+            ></i>
+            } @case ('office') {
+            <i
+              (click)="[searching = !searching, searchLocationRef?.focus()]"
+              class="icon-[vaadin--office] shrink-0 text-indigo-600"
+              role="img"
+              aria-hidden="true"
+            ></i>
+            } @case ('classroom') {
+            <i
+              (click)="[searching = !searching, searchLocationRef?.focus()]"
+              class="icon-[arcticons--classroom] shrink-0 text-teal-400"
+              role="img"
+              aria-hidden="true"
+            ></i>
+            } @case ('toilet') {
+            <i
+              (click)="[searching = !searching, searchLocationRef?.focus()]"
+              class="icon-[twemoji--toilet] shrink-0 text-cyan-500"
+              role="img"
+              aria-hidden="true"
+            ></i>
+
+            } @default {
+            <i
+              (click)="[searching = !searching, searchLocationRef?.focus()]"
+              class="icon-[mdi--home] shrink-0"
+              role="img"
+              aria-hidden="true"
+            ></i>
+
+            } }
+            <div class="flex flex-col" role="button">
+              <div class="flex gap-2 items-center">
+                <span class=""> {{ location.name }} </span>
+                @if (location.block) {
+                <span
+                  class="text-xs text-muted font-thin font-italic shrink-0 truncate"
+                >
+                  ({{ location.block }})
+                </span>
+
+                }
+              </div>
+            </div>
+          </div>
+          } @empty { @if (search.length > 0) {
+          <div class="flex gap-2 items-center">
+            <i
+              (click)="[searching = !searching, searchLocationRef?.focus()]"
+              class="icon-[mdi--help] shrink-0"
+              role="img"
+              aria-hidden="true"
+            ></i>
+
+            <div class="flex flex-col" role="button">
+              <div class="flex gap-2 justify-center items-center">
+                <span class=""> Location not found </span>
+                <span
+                  class="text-xs text-muted font-thin font-italic shrink-0 truncate"
+                >
+                  (Try something else)
+                </span>
+              </div>
+            </div>
+          </div>
+          } }
+        </div>
+      </div>
+      }
+    </div>
+  </nav>
+
+  <app-slider [show]="menu" (showChange)="menu = $event" />
+</div>

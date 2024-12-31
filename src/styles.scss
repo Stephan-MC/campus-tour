@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @use "tailwindcss";
-@use "../_theme.scss";
+@use "../theme";
 
 @plugin './common/plugins/tailwindcss/icon.ts';
+
+@layer base {
+  [role="button"] {
+    cursor: pointer;
+  }
+}
