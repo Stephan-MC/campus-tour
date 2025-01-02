@@ -4,9 +4,13 @@
 >
   <div class="flex items-center justify-">
     <div
-      class="grid grid-cols-4 tablet:grid-cols-5 laptop:grid-cols-6 gap-8 px-12"
+      class="grid grid-cols-4 tablet:grid-cols-5 laptop:grid-cols-6 gap-8 px-12 *:cursor-pointer"
     >
-      <div class="flex flex-col gap-2 items-center justiy-center">
+      <div
+        class="flex flex-col gap-2 items-center justiy-center"
+        (click)="categoryChange.emit('canteen')"
+        (click)="show.set(false)"
+      >
         <div
           class="flex items-center justify-center size-12 rounded-full ring ring-red-400"
         >
@@ -18,7 +22,11 @@
         </div>
         <span class="text-sm font-light text-red-400">Canteen</span>
       </div>
-      <div class="flex flex-col gap-2 items-center justiy-center">
+      <div
+        class="flex flex-col gap-2 items-center justiy-center"
+        (click)="categoryChange.emit('office')"
+        (click)="show.set(false)"
+      >
         <div
           class="flex items-center justify-center size-12 rounded-full ring ring-indigo-600"
         >
@@ -30,7 +38,11 @@
         </div>
         <span class="font-light text-xs text-indigo-600">Office</span>
       </div>
-      <div class="flex flex-col gap-2 items-center justiy-center">
+      <div
+        class="flex flex-col gap-2 items-center justiy-center"
+        (click)="categoryChange.emit('toilet')"
+        (click)="show.set(false)"
+      >
         <div
           class="flex items-center justify-center size-12 rounded-full ring ring-cyan-600"
         >

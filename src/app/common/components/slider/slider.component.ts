@@ -13,6 +13,7 @@ import {
   input,
   linkedSignal,
   model,
+  output,
 } from '@angular/core';
 
 @Component({
@@ -42,6 +43,9 @@ import {
 export class SliderComponent {
   private elementRef = inject(ElementRef);
   show = model<boolean>(false);
+  categoryChange = output<string>();
+
+  protected currentCategory = '';
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event): void {
