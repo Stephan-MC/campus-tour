@@ -5,16 +5,20 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { NgClass } from '@angular/common';
+import { isPlatformBrowser, NgClass } from '@angular/common';
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   HostListener,
+  inject,
+  PLATFORM_ID,
   signal,
   viewChild,
 } from '@angular/core';
 import { SliderComponent } from '../common/components/slider/slider.component';
 import { FormsModule } from '@angular/forms';
+import { MapService } from '../common/services/map.service';
 
 @Component({
   selector: 'app-home',
@@ -39,7 +43,11 @@ import { FormsModule } from '@angular/forms';
     ]),
   ],
 })
-export class HomePage {
+export class HomePage implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
+  private mapService = inject(MapService);
+  private mapRef = viewChild.required<ElementRef<HTMLDivElement>>('mapRef');
+
   private comboBoxRef = viewChild<ElementRef<HTMLDivElement>>('comboBoxRef');
   showComboBox = signal(false);
   menu = false;
@@ -168,6 +176,46 @@ export class HomePage {
   ];
 
   filteredLocations = signal<typeof this.locations>([]);
+  selectedLocations = signal<typeof this.locations>([]);
+
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      navigator.geolocation.watchPosition(
+        (position) => {
+          this.mapService.loadMap({
+            id: 'DEMO_MAP_ID',
+          });
+          this.mapService.initMap(this.mapRef().nativeElement, {
+            center: {
+              lng: position.coords.longitude,
+              lat: position.coords.latitude,
+            },
+            zoom: 25,
+          });
+
+          const glyph = document.createElement('div');
+          glyph.innerHTML = `<i class="icon-[mdi--map-marker-account-outline] text-lg pt-px" role="img" aria-hidden="true"></i>`;
+
+          this.mapService.addMarker({
+            position: {
+              lng: position.coords.longitude,
+              lat: position.coords.latitude,
+            },
+            title: 'Your current Position',
+            // content: new google.maps.marker.PinElement({
+            //   glyph,
+            //   glyphColor: 'var(--color-primary)',
+            //   background: 'transparent',
+            // }),
+          });
+        },
+        (error) => {},
+        { enableHighAccuracy: true },
+      );
+    }
+  }
 
   handleSearch() {
     this.showComboBox.set(!!this.search.length);
@@ -196,5 +244,11 @@ export class HomePage {
     if (!isComboBoxClicked) {
       this.showComboBox.set(false);
     }
+  }
+
+  selectLocationsBy(category: string) {
+    this.selectedLocations.set(
+      this.locations.filter((location) => location.type == category),
+    );
   }
 }
