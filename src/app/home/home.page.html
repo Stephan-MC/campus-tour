@@ -2,16 +2,16 @@
   <div class="size-full" id="map" map-id="DEMO_MAP_ID" #mapRef></div>
   <nav class="absolute top-0 inset-x-0 mt-4">
     <div
-      class="relative bg-white rounded flex gap-4 items-center mx-2 px-2 py-1"
+      class="relative bg-white dark:bg-slate-900 rounded flex gap-4 items-center mx-2 px-2 py-1"
     >
       <i
         (click)="menu =! menu"
-        class="icon-[mdi--menu] text-black shrink-0 cursor-pointer"
+        class="icon-[mdi--menu] shrink-0 cursor-pointer"
         role="button"
         aria-hidden="true"
       ></i>
       <div
-        [ngClass]="{ 'flex flex-1 items-center gap-2 rounded px-2 py-1 ': true, 'border-transparent': !searching, ' border-gray-400/30 focus-within:outline border': searching }"
+        [ngClass]="{ 'flex flex-1 items-center gap-2 rounded px-2 py-1': true, 'border-transparent': !searching, ' border-gray-400/30 focus-within:outline border': searching }"
       >
         <input
           class="flex-1 bg-transparent focus:outline-hidden"

@@ -8,4 +8,8 @@
   [role="button"] {
     cursor: pointer;
   }
+
+  [class^="icon"] {
+    @apply text-black dark:text-white;
+  }
 }
