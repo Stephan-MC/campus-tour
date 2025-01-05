@@ -181,37 +181,66 @@ export class HomePage implements AfterViewInit {
   ngOnInit() {}
 
   ngAfterViewInit() {
+    this.mapService.loadMap({
+      id: 'UB',
+    });
+
     if (isPlatformBrowser(this.platformId)) {
       navigator.geolocation.watchPosition(
         (position) => {
-          this.mapService.loadMap({
-            id: 'DEMO_MAP_ID',
-          });
           this.mapService.initMap(this.mapRef().nativeElement, {
             center: {
               lng: position.coords.longitude,
               lat: position.coords.latitude,
             },
-            zoom: 25,
+            zoom: 20,
+            mapId: 'DEMO_MAP_ID',
+            styles: [
+              {
+                featureType: 'poi',
+                stylers: [
+                  {
+                    visibility: 'off',
+                  },
+                ],
+              },
+            ],
           });
 
           const glyph = document.createElement('div');
-          glyph.innerHTML = `<i class="icon-[mdi--map-marker-account-outline] text-lg pt-px" role="img" aria-hidden="true"></i>`;
+          glyph.innerHTML = `<i class="icon-[mdi--map-marker-account-outline] text-lg pt-px text-primary" role="img" aria-hidden="true"></i>`;
 
-          this.mapService.addMarker({
+          this.mapService.addAdvancedMarker({
             position: {
               lng: position.coords.longitude,
               lat: position.coords.latitude,
             },
             title: 'Your current Position',
-            // content: new google.maps.marker.PinElement({
-            //   glyph,
-            //   glyphColor: 'var(--color-primary)',
-            //   background: 'transparent',
-            // }),
+            pin: {
+              glyph,
+              glyphColor: 'var(--color-primary)',
+              background: 'transparent',
+            },
           });
         },
-        (error) => {},
+        (error) => {
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              // TODO: Notify the user the location permission was denied
+              break;
+
+            case error.POSITION_UNAVAILABLE:
+              // TODO: Notify the user the location is unavailable
+              break;
+
+            case error.TIMEOUT:
+              // TODO: Notify the user the location request timed out
+              break;
+
+            default:
+            // TODO: Notify the user an unknown error occurred
+          }
+        },
         { enableHighAccuracy: true },
       );
     }
