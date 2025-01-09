@@ -216,10 +216,19 @@ export class HomePage implements AfterViewInit {
     if (isPlatformBrowser(this.platformId)) {
       this.mapService.initMap(this.mapRef().nativeElement, {
         center: {
-          lat: 4.1489,
-          lng: 9.2879,
+          lat: 4.149944,
+          lng: 9.287684,
         },
-        zoom: 12,
+        restriction: {
+          latLngBounds: {
+            north: 4.155404,
+            west: 9.280921,
+            east: 9.2952,
+            south: 4.142207,
+          },
+          strictBounds: true,
+        },
+        zoom: 15,
         mapId: 'DEMO_MAP_ID',
         styles: [
           {

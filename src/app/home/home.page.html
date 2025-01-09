@@ -46,21 +46,28 @@
             } @case ('office') {
             <i
               (click)="[searching = !searching, searchLocationRef?.focus()]"
-              class="icon-[vaadin--office] shrink-0 text-indigo-600"
+              class="icon-[guidance--office] shrink-0 text-indigo-600"
               role="img"
               aria-hidden="true"
             ></i>
             } @case ('classroom') {
             <i
               (click)="[searching = !searching, searchLocationRef?.focus()]"
-              class="icon-[arcticons--classroom] shrink-0 text-teal-400"
+              class="icon-[game-icons--teacher] shrink-0 text-yellow-500"
+              role="img"
+              aria-hidden="true"
+            ></i>
+            } @case ('classroom blocks') {
+            <i
+              (click)="[searching = !searching, searchLocationRef?.focus()]"
+              class="icon-[game-icons--teacher] shrink-0 text-teal-400"
               role="img"
               aria-hidden="true"
             ></i>
             } @case ('toilet') {
             <i
               (click)="[searching = !searching, searchLocationRef?.focus()]"
-              class="icon-[twemoji--toilet] shrink-0 text-cyan-500"
+              class="icon-[emojione-monotone--toilet] shrink-0 text-gray-400"
               role="img"
               aria-hidden="true"
             ></i>
