@@ -210,40 +210,41 @@ export class HomePage implements AfterViewInit {
   ngAfterViewInit() {
     this.mapService.loadMap({
       id: 'UB',
+      version: 'beta',
     });
 
     if (isPlatformBrowser(this.platformId)) {
-      navigator.geolocation.watchPosition(
-        (position) => {
-          this.mapService.initMap(this.mapRef().nativeElement, {
-            center: {
-              lat: 4.1489,
-              lng: 9.2879,
-            },
-            zoom: 12,
-            mapId: 'DEMO_MAP_ID',
-            styles: [
+      this.mapService.initMap(this.mapRef().nativeElement, {
+        center: {
+          lat: 4.1489,
+          lng: 9.2879,
+        },
+        zoom: 12,
+        mapId: 'DEMO_MAP_ID',
+        styles: [
+          {
+            featureType: 'all',
+            elementType: 'all',
+            stylers: [
               {
-                featureType: 'all',
-                elementType: 'all',
-                stylers: [
-                  {
-                    visibility: 'off',
-                  },
-                ],
-              },
-              {
-                featureType: 'poi',
-                elementType: 'all',
-                stylers: [
-                  {
-                    visibility: 'off',
-                  },
-                ],
+                visibility: 'off',
               },
             ],
-          });
+          },
+          {
+            featureType: 'poi',
+            elementType: 'all',
+            stylers: [
+              {
+                visibility: 'off',
+              },
+            ],
+          },
+        ],
+      });
 
+      navigator.geolocation.watchPosition(
+        (position) => {
           const glyph = document.createElement('div');
           glyph.innerHTML = `<i class="icon-[mdi--map-marker-account-outline] text-lg pt-px text-primary" role="img" aria-hidden="true"></i>`;
 
