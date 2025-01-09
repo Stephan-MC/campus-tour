@@ -13,3 +13,6 @@
     @apply text-black dark:text-white;
   }
 }
+
+@variant supports-dvw (@supports (width: 100dvw));
+@variant supports-dvh (@supports (height: 100dvh));

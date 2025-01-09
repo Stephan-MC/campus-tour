@@ -40,6 +40,9 @@ import { CategoryCardComponent } from '../category-card/category-card.component'
       transition('close => open', animate('200ms linear')),
     ]),
   ],
+  host: {
+    '[@menu]': "show() ? 'open' : 'close'",
+  },
 })
 export class SliderComponent {
   private elementRef = inject(ElementRef);
