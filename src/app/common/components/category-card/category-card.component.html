@@ -1,0 +1,19 @@
+<div class="flex flex-col gap-2 items-center justiy-center">
+  <div
+    class="flex items-center justify-center size-12 rounded-full ring"
+    [style.--tw-ring-color]="'var(--color-' + color() + ')'"
+  >
+    <i
+      [ngClass]="{ 'shrink-0 text-2xl': true }"
+      [class]="icon()"
+      [style.color]="'var(--color-' + color() + ')'"
+      role="img"
+      aria-hidden="true"
+    ></i>
+  </div>
+  <span
+    class="text-sm text-center font-light first-letter:uppercase"
+    [style.color]="'var(--color-' + color() + ')'"
+    >{{ text() }}</span
+  >
+</div>

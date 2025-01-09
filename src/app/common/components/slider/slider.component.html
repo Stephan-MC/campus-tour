@@ -4,58 +4,16 @@
 >
   <div class="flex items-center justify-">
     <div
-      class="grid grid-cols-4 tablet:grid-cols-5 laptop:grid-cols-6 gap-8 px-12 *:cursor-pointer"
+      class="flex flex-wrap justify-items-center *:basis-25 gap-x-6 gap-y-10 w-full px-8 *:cursor-pointer"
     >
-      <div
-        class="flex flex-col gap-2 items-center justiy-center"
-        (click)="categoryChange.emit('canteen')"
-        (click)="show.set(false)"
-      >
-        <div
-          class="flex items-center justify-center size-12 rounded-full ring ring-red-400"
-        >
-          <i
-            class="icon-[mdi--restaurant] shrink-0 text-red-400"
-            role="img"
-            aria-hidden="true"
-          ></i>
-        </div>
-        <span class="text-sm font-light text-red-400">Canteen</span>
-      </div>
-      <div
-        class="flex flex-col gap-2 items-center justiy-center"
-        (click)="categoryChange.emit('office')"
-        (click)="show.set(false)"
-      >
-        <div
-          class="flex items-center justify-center size-12 rounded-full ring ring-indigo-600"
-        >
-          <i
-            class="icon-[vaadin--office] shrink-0 text-indigo-600"
-            role="img"
-            aria-hidden="true"
-          ></i>
-        </div>
-        <span class="font-light text-xs text-indigo-600">Office</span>
-      </div>
-      <div
-        class="flex flex-col gap-2 items-center justiy-center"
-        (click)="categoryChange.emit('toilet')"
-        (click)="show.set(false)"
-      >
-        <div
-          class="flex items-center justify-center size-12 rounded-full ring ring-cyan-600"
-        >
-          <i
-            class="icon-[twemoji--toilet] shrink-0 text-cyan-600"
-            role="img"
-            aria-hidden="true"
-          ></i>
-        </div>
-        <span class="font-light text-xs text-cyan-600">Toilet</span>
-      </div>
-      @for (item of [1, 2, 3, 4]; track $index) {
-        <span class="size-12 rounded-full ring ring-blue-300"></span>
+      @for (category of categories; track category.name) {
+        <app-category-card
+          [color]="category.color"
+          [text]="category.name"
+          [icon]="category.icon"
+          (click)="categoryChange.emit(category.name)"
+          (click)="show.set(false)"
+        />
       }
     </div>
   </div>

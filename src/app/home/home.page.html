@@ -2,7 +2,7 @@
   <div class="size-full" id="map" map-id="DEMO_MAP_ID" #mapRef></div>
   <nav class="absolute top-0 inset-x-0 mt-4">
     <div
-      class="relative bg-white dark:bg-slate-900 rounded flex gap-4 items-center mx-2 px-2 py-1"
+      class="relative bg-white dark:bg-slate-900 dark:text-white rounded flex gap-4 items-center mx-2 px-2 py-1"
     >
       <i
         (click)="menu =! menu"
@@ -30,7 +30,7 @@
 
       @if (showComboBox()) {
       <div class="absolute top-[110%] inset-x-0 px-1" #comboBoxRef>
-        <div class="bg-white p-1 px-2 rounded space-y-2">
+        <div class="bg-white dark:bg-slate-900 p-1 px-2 rounded space-y-2">
           @for(location of filteredLocations(); track $index) {
           <div
             class="flex gap-2 items-center w-full cursor-pointer"

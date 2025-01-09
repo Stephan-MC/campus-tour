@@ -9,9 +9,12 @@ import { isPlatformBrowser, NgClass } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  computed,
+  effect,
   ElementRef,
   HostListener,
   inject,
+  linkedSignal,
   PLATFORM_ID,
   signal,
   viewChild,
@@ -49,6 +52,7 @@ export class HomePage implements AfterViewInit {
   private mapRef = viewChild.required<ElementRef<HTMLDivElement>>('mapRef');
 
   private comboBoxRef = viewChild<ElementRef<HTMLDivElement>>('comboBoxRef');
+  private selectedCategory = signal('');
   showComboBox = signal(false);
   menu = false;
   searching = false;
@@ -60,7 +64,7 @@ export class HomePage implements AfterViewInit {
       name: "Megoze's Office",
       block: 'Old Library',
       type: 'office',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -69,7 +73,7 @@ export class HomePage implements AfterViewInit {
       name: "Mr Mbella's Office",
       block: 'Faculty of Education',
       type: 'office',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -78,7 +82,7 @@ export class HomePage implements AfterViewInit {
       name: 'Female toilets',
       block: 'Old Library',
       type: 'toilet',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -87,7 +91,7 @@ export class HomePage implements AfterViewInit {
       name: 'UBlock E',
       block: 'U-Block',
       type: 'classroom',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -96,7 +100,7 @@ export class HomePage implements AfterViewInit {
       name: 'UBlock D',
       block: 'U-Block',
       type: 'classroom',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -105,7 +109,7 @@ export class HomePage implements AfterViewInit {
       name: 'UBlock F',
       block: 'U-Block',
       type: 'classroom',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -114,7 +118,7 @@ export class HomePage implements AfterViewInit {
       name: 'UBlock G',
       block: 'U-Block',
       type: 'classroom',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -123,7 +127,7 @@ export class HomePage implements AfterViewInit {
       name: 'CLRBLK II 150 A',
       block: 'Classroom Block II',
       type: 'classroom',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -132,7 +136,7 @@ export class HomePage implements AfterViewInit {
       name: 'Staff Canteen',
       block: '',
       type: 'canteen',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -141,7 +145,7 @@ export class HomePage implements AfterViewInit {
       name: 'Restau',
       block: 'Restau',
       type: 'canteen',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -150,7 +154,7 @@ export class HomePage implements AfterViewInit {
       name: 'Restau I',
       block: 'Restau',
       type: 'classroom',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -159,7 +163,7 @@ export class HomePage implements AfterViewInit {
       name: 'Restau II',
       block: 'Restau',
       type: 'classroom',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -168,7 +172,7 @@ export class HomePage implements AfterViewInit {
       name: 'Restau III',
       block: 'Restau',
       type: 'classroom',
-      coordingate: {
+      coordinate: {
         lng: 0.0001,
         lat: 2.435434,
       },
@@ -176,7 +180,30 @@ export class HomePage implements AfterViewInit {
   ];
 
   filteredLocations = signal<typeof this.locations>([]);
-  selectedLocations = signal<typeof this.locations>([]);
+  selectedLocations = linkedSignal(() =>
+    this.locations.filter(
+      (location) => location.type === this.selectedCategory(),
+    ),
+  );
+
+  constructor() {
+    effect(() => {
+      this.selectedLocations().forEach((location) => {
+        this.mapService.addAdvancedMarker({
+          position: location.coordinate,
+          title: location.name,
+          // TODO: Add icons here
+          // content: location.name,
+          // icon: {
+          //   path: google.maps.SymbolPath.CIRCLE,
+          //   fillColor: 'white',
+          //   fillOpacity: 1,
+          //   scale: 5,
+          // },
+        });
+      });
+    });
+  }
 
   ngOnInit() {}
 
@@ -190,14 +217,24 @@ export class HomePage implements AfterViewInit {
         (position) => {
           this.mapService.initMap(this.mapRef().nativeElement, {
             center: {
-              lng: position.coords.longitude,
-              lat: position.coords.latitude,
+              lat: 4.1489,
+              lng: 9.2879,
             },
-            zoom: 20,
+            zoom: 12,
             mapId: 'DEMO_MAP_ID',
             styles: [
               {
+                featureType: 'all',
+                elementType: 'all',
+                stylers: [
+                  {
+                    visibility: 'off',
+                  },
+                ],
+              },
+              {
                 featureType: 'poi',
+                elementType: 'all',
                 stylers: [
                   {
                     visibility: 'off',
@@ -276,8 +313,9 @@ export class HomePage implements AfterViewInit {
   }
 
   selectLocationsBy(category: string) {
-    this.selectedLocations.set(
-      this.locations.filter((location) => location.type == category),
-    );
+    this.selectedCategory.set(category);
+    // this.selectedLocations.set(
+    //   this.locations.filter((location) => location.type == category),
+    // );
   }
 }
