@@ -10,7 +10,7 @@ export class MapService {
 
   loadMap(options?: Omit<LoaderOptions, 'apiKey'>) {
     this.loader = new Loader({
-      apiKey: 'AIzaSyAMKDOBvAjEyvrY8zAqz0buMxZOip3HL5U',
+      apiKey: 'AIzaSyDjmFNFKcCPdcrqY1PbNc4yb3TLGpHeB54',
       language: 'en',
       region: 'CM',
       ...options,
