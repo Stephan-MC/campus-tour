@@ -82,8 +82,10 @@ export class HomePage implements AfterViewInit {
           marker.map = null;
         });
 
+        const category =
+          categories[location.category as keyof typeof categories];
         const glyph = document.createElement('div');
-        glyph.innerHTML = `<i class="${categories[location.category as keyof typeof categories].icon} text-lg pt-px text-primary" role="img" aria-hidden="true"></i>`;
+        glyph.innerHTML = `<i class="${category.icon} text-lg pt-px" style="color: var(--color-${category.color})" role="img" aria-hidden="true"></i>`;
 
         this.mapService
           .addAdvancedMarker({
