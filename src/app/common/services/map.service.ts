@@ -43,4 +43,8 @@ export class MapService {
         return new AdvancedMarkerElement({ map: this.map, ...options });
       });
   }
+
+  setCenter(center: google.maps.LatLng | google.maps.LatLngLiteral) {
+    this.map.setCenter(center);
+  }
 }

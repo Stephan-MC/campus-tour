@@ -22,6 +22,8 @@ import {
 import { SliderComponent } from '../common/components/slider/slider.component';
 import { FormsModule } from '@angular/forms';
 import { MapService } from '../common/services/map.service';
+import { locations, categories } from './data/coordinates.json';
+import { Location } from '../common/types/location';
 
 @Component({
   selector: 'app-home',
@@ -59,160 +61,51 @@ export class HomePage implements AfterViewInit {
   search = '';
 
   // TODO: Implement frequently visited places
-  locations = [
-    {
-      name: "Megoze's Office",
-      block: 'Old Library',
-      type: 'office',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: "Mr Mbella's Office",
-      block: 'Faculty of Education',
-      type: 'office',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'Female toilets',
-      block: 'Old Library',
-      type: 'toilet',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'UBlock E',
-      block: 'U-Block',
-      type: 'classroom',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'UBlock D',
-      block: 'U-Block',
-      type: 'classroom',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'UBlock F',
-      block: 'U-Block',
-      type: 'classroom',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'UBlock G',
-      block: 'U-Block',
-      type: 'classroom',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'CLRBLK II 150 A',
-      block: 'Classroom Block II',
-      type: 'classroom',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'Staff Canteen',
-      block: '',
-      type: 'canteen',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'Restau',
-      block: 'Restau',
-      type: 'canteen',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'Restau I',
-      block: 'Restau',
-      type: 'classroom',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'Restau II',
-      block: 'Restau',
-      type: 'classroom',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-    {
-      name: 'Restau III',
-      block: 'Restau',
-      type: 'classroom',
-      coordinate: {
-        lng: 0.0001,
-        lat: 2.435434,
-      },
-    },
-  ];
+  markers: Array<google.maps.marker.AdvancedMarkerElement> = [];
+  protected categories = categories;
 
-  filteredLocations = signal<typeof this.locations>([]);
+  filteredLocations = signal<Array<Location>>([]);
   selectedLocations = linkedSignal(() =>
-    this.locations.filter(
-      (location) => location.type === this.selectedCategory(),
+    locations.filter(
+      (location) => location.category === this.selectedCategory(),
     ),
   );
 
   constructor() {
     effect(() => {
+      if (this.selectedLocations().length == 1) {
+        this.mapService.setCenter(this.selectedLocations()[0].coordinate);
+      }
+
       this.selectedLocations().forEach((location) => {
-        this.mapService.addAdvancedMarker({
-          position: location.coordinate,
-          title: location.name,
-          // TODO: Add icons here
-          // content: location.name,
-          // icon: {
-          //   path: google.maps.SymbolPath.CIRCLE,
-          //   fillColor: 'white',
-          //   fillOpacity: 1,
-          //   scale: 5,
-          // },
+        this.markers.forEach((marker) => {
+          marker.map = null;
         });
+
+        const glyph = document.createElement('div');
+        glyph.innerHTML = `<i class="${categories[location.category as keyof typeof categories].icon} text-lg pt-px text-primary" role="img" aria-hidden="true"></i>`;
+
+        this.mapService
+          .addAdvancedMarker({
+            position: location.coordinate,
+            title: location.name,
+            pin: {
+              glyph,
+              glyphColor: 'yellow',
+            },
+          })
+          .then((marker) => this.markers.push(marker));
       });
     });
   }
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
+  ngOnInit() {
     this.mapService.loadMap({
       id: 'UB',
-      version: 'beta',
     });
+  }
 
+  ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.mapService.initMap(this.mapRef().nativeElement, {
         center: {
@@ -298,14 +191,14 @@ export class HomePage implements AfterViewInit {
 
     this.filteredLocations.set(
       this.search.length
-        ? this.locations
+        ? (locations as Array<Location>)
             .filter(
               (l) =>
                 l.name.toLowerCase().includes(this.search.toLowerCase()) ||
                 (this.search.length >= 2 &&
                   l.block.toLowerCase().includes(this.search.toLowerCase())) ||
                 (this.search.length >= 2 &&
-                  l.type.includes(this.search.toLowerCase())),
+                  l.category.includes(this.search.toLowerCase())),
             )
             .slice(0, 7)
         : [],
@@ -324,8 +217,13 @@ export class HomePage implements AfterViewInit {
 
   selectLocationsBy(category: string) {
     this.selectedCategory.set(category);
-    // this.selectedLocations.set(
-    //   this.locations.filter((location) => location.type == category),
-    // );
+  }
+
+  removeAllMarkers() {
+    this.markers.forEach((marker) => {
+      marker.map = null;
+    });
+
+    this.markers = [];
   }
 }

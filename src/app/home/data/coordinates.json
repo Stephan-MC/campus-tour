@@ -1,0 +1,171 @@
+{
+  "categories": {
+    "canteen": {
+      "name": "canteen",
+      "icon": "icon-[mdi--restaurant]",
+      "color": "orange-500"
+    },
+    "office": {
+      "name": "office",
+      "icon": "icon-[guidance--office]",
+      "color": "blue-600"
+    },
+    "amphi": {
+      "name": "Amphi",
+      "color": "purple-400",
+      "icon": "icon-[fluent-emoji-high-contrast--post-office]"
+    },
+    "market-center": {
+      "name": "Market center",
+      "icon": "icon-[solar--shop-linear]",
+      "color": "pink-500"
+    },
+    "toilet": {
+      "name": "Toilets",
+      "icon": "icon-[emojione-monotone--toilet]",
+      "color": "gray-400"
+    },
+    "health-center": {
+      "name": "health center",
+      "icon": "icon-[lucide--hospital]",
+      "color": "teal-400"
+    },
+    "library": {
+      "name": "library",
+      "icon": "icon-[famicons--library-sharp]",
+      "color": "green-500"
+    },
+    "printing-spot": {
+      "name": "printing spot",
+      "icon": "icon-[el--print]",
+      "color": "indigo-500"
+    },
+    "lab": {
+      "name": "lab",
+      "icon": "icon-[entypo--lab-flask]",
+      "color": "blue-500"
+    },
+    "classroom": {
+      "name": "Classroom",
+      "icon": "icon-[game-icons--teacher]",
+      "color": "yellow-500"
+    },
+    "classroom-block": {
+      "name": "classroom block",
+      "icon": "icon-[game-icons--teacher]",
+      "color": "yellow-500"
+    },
+    "faculty": {
+      "name": "faculty",
+      "icon": "icon-[ph--building-apartment-light]",
+      "color": "purple-600"
+    },
+    "administrative-block": {
+      "name": "Administrative block",
+      "icon": "icon-[icomoon-free--office]",
+      "color": "gray-600"
+    },
+    "sport-pitch": {
+      "name": "Sport pitch",
+      "icon": "icon-[material-symbols--sports-and-outdoors]",
+      "color": "green-600"
+    },
+    "ub-hostel": {
+      "name": "UB hostel",
+      "icon": "icon-[ic--baseline-holiday-village]",
+      "color": "brown-500"
+    }
+  },
+  "locations": [
+    {
+      "name": "U Block",
+      "block": "U Block",
+      "category": "classroom-block",
+      "coordinate": {
+        "lat": 4.1495824,
+        "lng": 9.2835103
+      }
+    },
+    {
+      "name": "U Block D",
+      "block": "U Block",
+      "category": "classroom",
+      "coordinate": {
+        "lat": 4.15011,
+        "lng": 9.283467
+      }
+    },
+    {
+      "name": "U Block E",
+      "block": "U Block",
+      "category": "classroom",
+      "coordinate": {
+        "lat": 4.149989,
+        "lng": 9.283579
+      }
+    },
+    {
+      "name": "U Block F",
+      "block": "U Block",
+      "category": "classroom",
+      "coordinate": {
+        "lat": 4.149834,
+        "lng": 9.283445
+      }
+    },
+    {
+      "name": "U Block G",
+      "block": "U Block",
+      "category": "classroom",
+      "coordinate": {
+        "lat": 4.149864,
+        "lng": 9.283442
+      }
+    },
+    {
+      "name": "Toilet",
+      "block": "U Block",
+      "category": "toilet",
+      "coordinate": {
+        "lat": 4.1495855,
+        "lng": 9.2836906
+      }
+    },
+    {
+      "name": "G119",
+      "block": "G Block",
+      "category": "classroom",
+      "coordinate": {
+        "lat": 4.150505,
+        "lng": 9.283428
+      }
+    },
+    {
+      "name": "G115",
+      "block": "G Block",
+      "category": "classroom",
+      "coordinate": {
+        "lat": 4.150274,
+        "lng": 9.28336
+      }
+    },
+    {
+      "name": "Medicals Laboratory",
+      "block": "",
+      "category": "health-center",
+      "coordinate": {
+        "lat": 4.150865,
+        "lng": 9.2837526
+      }
+    },
+    {
+      "name": "Department of Environmental Science, geology and physics lab",
+      "block": "",
+      "category": "lab",
+      "coordinate": {
+        "lat": 4.150865,
+        "lng": 9.2837526
+      }
+    }
+  ]
+}
