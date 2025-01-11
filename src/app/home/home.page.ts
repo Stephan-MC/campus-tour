@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { MapService } from '../common/services/map.service';
 import { locations, categories } from './data/coordinates.json';
 import { Location } from '../common/types/location';
+import { driver } from 'driver.js';
 
 @Component({
   selector: 'app-home',
@@ -191,6 +192,36 @@ export class HomePage implements AfterViewInit {
           },
         ],
       });
+
+      driver({
+        showProgress: true,
+        steps: [
+          {
+            element: '.hamburger',
+            popover: {
+              title: 'Menu',
+              description:
+                'Show a list of categories to display on the map. 🤔',
+            },
+          },
+          {
+            element: '.search-input',
+            popover: {
+              title: 'Search bar',
+              description:
+                'You can also use the search bar to find a location. start by typing something into it. 🤗',
+            },
+          },
+          {
+            element: '#map',
+            popover: {
+              title: 'Map',
+              description:
+                'All requested locations will be displayed on the map',
+            },
+          },
+        ],
+      }).drive();
 
       navigator.geolocation.watchPosition(
         (position) => {

@@ -6,12 +6,12 @@
     >
       <i
         (click)="menu =! menu"
-        class="icon-[mdi--menu] shrink-0 cursor-pointer"
+        class="hamburger icon-[mdi--menu] shrink-0 cursor-pointer"
         role="button"
         aria-hidden="true"
       ></i>
       <div
-        [ngClass]="{ 'flex flex-1 items-center gap-2 rounded px-2 py-1': true, 'border-transparent': !searching, ' border-gray-400/30 focus-within:outline border': searching }"
+        [ngClass]="{ 'search-input flex flex-1 items-center gap-2 rounded px-2 py-1': true, 'border-transparent': !searching, ' border-gray-400/30 focus-within:outline border': searching }"
       >
         <input
           class="flex-1 bg-transparent focus:outline-hidden"
