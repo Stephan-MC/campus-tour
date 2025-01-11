@@ -166,6 +166,24 @@
         "lat": 4.150865,
         "lng": 9.2837526
       }
+    },
+    {
+      "name": "Ublock Printing",
+      "block": "U Block",
+      "category": "printing-spot",
+      "coordinate": {
+        "lat": 4.15037,
+        "lng": 9.283744
+      }
+    },
+    {
+      "name": "UB girls Hostel",
+      "block": "U Block",
+      "category": "ub-hostel",
+      "coordinate": {
+        "lat": 4.1581375,
+        "lng": 9.2896719
+      }
     }
   ]
 }

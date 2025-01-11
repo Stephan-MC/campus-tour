@@ -12,6 +12,10 @@
   [class^="icon"] {
     @apply text-black dark:text-white;
   }
+
+  .map-glyph {
+    @apply rounded-lg aspect-video py-0.5 px-1 flex items-center justify-center border;
+  }
 }
 
 @variant supports-dvw (@supports (width: 100dvw));
