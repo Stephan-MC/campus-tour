@@ -44,6 +44,8 @@ import { KeyValuePipe } from '@angular/common';
   ],
   host: {
     '[@menu]': "show() ? 'open' : 'close'",
+    '[class]':
+      "'fixed block z-9999 inset-x-0 supports-dvh:max-h-[80dvh] mobile:supports-dvh:max-h-[80dvh] mobile:max-h-[80%] tablet:max-h-[50%] tablet:supports-dvh:max-h-[50dvh]'",
   },
 })
 export class SliderComponent {
