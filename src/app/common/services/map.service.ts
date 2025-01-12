@@ -7,6 +7,8 @@ import { Loader, LoaderOptions } from '@googlemaps/js-api-loader';
 export class MapService {
   private map!: google.maps.Map;
   private loader!: Loader;
+  private directionService!: google.maps.DirectionsService;
+  private directionRenderer!: google.maps.DirectionsRenderer;
 
   loadMap(options?: Omit<LoaderOptions, 'apiKey'>) {
     this.loader = new Loader({
@@ -45,6 +47,33 @@ export class MapService {
   }
 
   setCenter(center: google.maps.LatLng | google.maps.LatLngLiteral) {
-    this.map.setCenter(center);
+    this.map?.setCenter(center);
+  }
+
+  showDirection(
+    from: google.maps.LatLngLiteral,
+    to: google.maps.LatLngLiteral,
+  ) {
+    if (!this.directionService || !this.directionRenderer) {
+      this.directionService = new google.maps.DirectionsService();
+      this.directionRenderer = new google.maps.DirectionsRenderer({
+        map: this.map,
+      });
+    }
+
+    this.directionService.route(
+      {
+        origin: from,
+        destination: to,
+        travelMode: google.maps.TravelMode.DRIVING,
+      },
+      (result, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          this.directionRenderer.setDirections(result);
+        } else {
+          console.error('Error fetching directions', result);
+        }
+      },
+    );
   }
 }
