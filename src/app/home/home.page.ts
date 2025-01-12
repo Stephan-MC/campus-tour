@@ -295,6 +295,11 @@ export class HomePage implements AfterViewInit {
             .filter(
               (l) =>
                 l.name.toLowerCase().includes(this.search.toLowerCase()) ||
+                l.name
+                  .toLowerCase()
+                  .match(
+                    new RegExp(this.search.toLowerCase().split('').join('.*')),
+                  ) ||
                 (this.search.length >= 2 &&
                   l.block.toLowerCase().includes(this.search.toLowerCase())) ||
                 (this.search.length >= 2 &&
