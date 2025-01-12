@@ -51,8 +51,8 @@ export class MapService {
   }
 
   async showDirection(
-    from: google.maps.LatLngLiteral,
-    to: google.maps.LatLngLiteral,
+    from: google.maps.LatLngLiteral | google.maps.LatLng,
+    to: google.maps.LatLngLiteral | google.maps.LatLng,
   ) {
     const directionService = new google.maps.DirectionsService();
     const directionRenderer = new google.maps.DirectionsRenderer({

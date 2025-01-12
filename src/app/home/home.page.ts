@@ -81,6 +81,15 @@ export class HomePage implements AfterViewInit {
   constructor() {
     effect(() => {
       if (this.currentLocation()) {
+        this.markers.forEach((marker) => {
+          this.mapService
+            .showDirection(
+              this.currentLocation() as google.maps.LatLngLiteral,
+              marker.position as google.maps.LatLngLiteral,
+            )
+            .then((direction) => this.directions.push(direction));
+        });
+
         if (!this.currentLocationMarker()) {
           const glyph = document.createElement('div');
           glyph.innerHTML = `<i class="icon-[mdi--map-marker-account-outline] text-lg pt-px text-primary" role="img" aria-hidden="true"></i>`;
@@ -165,31 +174,29 @@ export class HomePage implements AfterViewInit {
                       this.currentLocation() as google.maps.LatLngLiteral,
                       location.coordinate,
                     );
-                  infoWidow.setContent(
-                    `${location.name} (${distance.toFixed(1)} meters from your current location)`,
-                  );
-                  infoWidow.open({
-                    map: marker.map,
-                    anchor: marker,
-                  });
+                  // infoWidow.setContent(
+                  //   `${location.name} (${distance.toFixed(1)} meters from your current location)`,
+                  // );
+                  // infoWidow.open({
+                  //   map: marker.map,
+                  //   anchor: marker,
+                  // });
                 });
 
                 this.markers.push(marker);
               });
-
-            this.directions.push();
-            this.mapService
-              .showDirection(
-                this.currentLocation() as google.maps.LatLngLiteral,
-                location.coordinate,
-              )
-              .then((direction) => this.directions.push(direction));
           });
 
-          this.mapService.setCenter({
-            lat: (center.max.lat + center.min.lat) / 2,
-            lng: (center.max.lng + center.min.lng) / 2,
-          });
+          if (this.currentLocation()) {
+            // this.mapService.setCenter(
+            //   this.currentLocation() as google.maps.LatLngLiteral,
+            // );
+          } else {
+            // this.mapService.setCenter({
+            //   lat: (center.max.lat + center.min.lat) / 2,
+            //   lng: (center.max.lng + center.min.lng) / 2,
+            // });
+          }
         }
       }
     });
