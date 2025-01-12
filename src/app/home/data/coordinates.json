@@ -74,6 +74,11 @@
       "name": "UB hostel",
       "icon": "icon-[ic--baseline-holiday-village]",
       "color": "brown-500"
+    },
+    "shuttle": {
+      "name": "shuttle",
+      "icon": "icon-[ic--baseline-holiday-village]",
+      "color": "teal-300"
     }
   },
   "locations": [
@@ -183,6 +188,330 @@
       "coordinate": {
         "lat": 4.1581375,
         "lng": 9.2896719
+      }
+    },
+    {
+      "name": "faculty of science",
+      "block": "",
+      "category": "classroom",
+      "coordinate": {
+        "lat": 4.1509,
+        "lng": 9.284911
+      }
+    },
+    {
+      "name": "Unesco building",
+      "block": "administrative",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.148682,
+        "lng": 9.28465
+      }
+    },
+    {
+      "name": "library",
+      "block": "",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.149002,
+        "lng": 9.285277
+      }
+    },
+    {
+      "name": "IT Center",
+      "block": "",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.147864,
+        "lng": 9.288665
+      }
+    },
+    {
+      "name": "Faculty of Social and Management Sciences",
+      "block": "administrative",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.14583,
+        "lng": 9.286545
+      }
+    },
+    {
+      "name": "ASTI",
+      "block": "",
+      "category": "office/classroom",
+      "coordinate": {
+        "lat": 4.147494,
+        "lng": 9.285575
+      }
+    },
+    {
+      "name": "Cultural Village",
+      "block": "",
+      "category": "",
+      "coordinate": {
+        "lat": 4.146713,
+        "lng": 9.285943
+      }
+    },
+    {
+      "name": "FHS",
+      "block": "",
+      "category": "",
+      "coordinate": {
+        "lat": 4.155533,
+        "lng": 9.296054
+      }
+    },
+    {
+      "name": "Faculty Of Engineering and Technology",
+      "block": "",
+      "category": "classroom",
+      "coordinate": {
+        "lat": 4.143779,
+        "lng": 9.28876
+      }
+    },
+    {
+      "name": "UB Central Administration parking",
+      "block": "administrative",
+      "category": "parking",
+      "coordinate": {
+        "lat": 4.148985,
+        "lng": 9.288521
+      }
+    },
+    {
+      "name": "Central Administration",
+      "block": "administrative",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.149024,
+        "lng": 9.287876
+      }
+    },
+    {
+      "name": "Department of environmental science, geology and physics lab",
+      "block": "Department of environmental science",
+      "category": "classroom-block",
+      "coordinate": {
+        "lat": 4.150495,
+        "lng": 9.284061
+      }
+    },
+    {
+      "name": "Biological Science",
+      "block": "Department of science",
+      "category": "classroom",
+      "coordinate": {
+        "lat": 4.150976,
+        "lng": 9.284543
+      }
+    },
+    {
+      "name": "lunch counter ",
+      "block": "U Block",
+      "category": "canteen",
+      "coordinate": {
+        "lat": 4.150555,
+        "lng": 9.284256
+      }
+    },
+    {
+      "name": "Ublock printing ",
+      "block": "Ublock",
+      "category": "printing-spot",
+      "coordinate": {
+        "lat": 4.15037,
+        "lng": 9.283744
+      }
+    },
+    {
+      "name": "Football field ",
+      "block": "",
+      "category": "sport-pitch",
+      "coordinate": {
+        "lat": 4.149569,
+        "lng": 9.289442
+      }
+    },
+    {
+      "name": "PEDAGOB",
+      "block": "PEDAGOB",
+      "category": "classroom-block",
+      "coordinate": {
+        "lat": 4.1467738,
+        "lng": 9.2916879
+      }
+    },
+    {
+      "name": "UB Shuttle",
+      "block": "",
+      "category": "shuttle",
+      "coordinate": {
+        "lat": 4.153826,
+        "lng": 9.290765
+      }
+    },
+    {
+      "name": "ASTI Toilet",
+      "block": "ASTI",
+      "category": "toilet",
+      "coordinate": {
+        "lat": 4.147734,
+        "lng": 9.285517
+      }
+    },
+    {
+      "name": "Classroom Block I",
+      "block": "",
+      "category": "classroom-block",
+      "coordinate": {
+        "lat": 4.1447109,
+        "lng": 9.2864494
+      }
+    },
+    {
+      "name": "Classroom Block II",
+      "block": "",
+      "category": "classroom-block",
+      "coordinate": {
+        "lat": 4.1444584,
+        "lng": 9.2821085
+      }
+    },
+    {
+      "name": "Collage of technology faculty",
+      "block": "",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.1479089,
+        "lng": 9.282354
+      }
+    },
+    {
+      "name": "Mathematics (D024)",
+      "block": "Faculty of science",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.1509,
+        "lng": 9.284911
+      }
+    },
+    {
+      "name": "Faculty of Arts Vise Dean(R307-upstairs)",
+      "block": "Faculty of Arts",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.149291,
+        "lng": 9.286006
+      }
+    },
+    {
+      "name": "Faculty of science vise Dean(D019)",
+      "block": "Faculty of science",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.1509,
+        "lng": 9.284911
+      }
+    },
+    {
+      "name": "Faculty of law Dean (R011)",
+      "block": "Faculty of law and political science",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.146952,
+        "lng": 9.286538
+      }
+    },
+    {
+      "name": "Faculty of Social and Management Sciences Dean(R034)",
+      "block": "administrative",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.14583,
+        "lng": 9.286545
+      }
+    },
+    {
+      "name": "Head Of Department of promotion in Bilingualism (R303A)",
+      "block": "ASTI",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.147494,
+        "lng": 9.285575
+      }
+    },
+    {
+      "name": "Admission and Record Services (2002C)",
+      "block": "ASTI",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.147494,
+        "lng": 9.285575
+      }
+    },
+    {
+      "name": "Conference Room (2002C)",
+      "block": "ASTI",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.147494,
+        "lng": 9.285575
+      }
+    },
+    {
+      "name": "Deputy Director (311C)",
+      "block": "ASTI",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.147494,
+        "lng": 9.285575
+      }
+    },
+    {
+      "name": "Head Of Department of Interpretation (R304A)",
+      "block": "ASTI",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.147494,
+        "lng": 9.285575
+      }
+    },
+    {
+      "name": "Head of department of Computer Engineering (R014)",
+      "block": "College of Technology, UNESCO Building",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.149131,
+        "lng": 9.285238
+      }
+    },
+    {
+      "name": "Director of COT (R006)",
+      "block": "College of Technology, UNESCO Building",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.149131,
+        "lng": 9.285238
+      }
+    },
+    {
+      "name": "Head of Department of Electrical Engineering (R013)",
+      "block": "College of Technology, UNESCO Building",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.148682,
+        "lng": 9.28465
+      }
+    },
+    {
+      "name": "Head of Department of Mechanical Engineering (R009)",
+      "block": "Faculty Of Engineering and Technology, UNESCO Building",
+      "category": "office",
+      "coordinate": {
+        "lat": 4.148682,
+        "lng": 9.28465
       }
     }
   ]
