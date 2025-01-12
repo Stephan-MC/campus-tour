@@ -120,6 +120,8 @@ export class HomePage implements AfterViewInit {
 
           this.removeAllMarkers();
 
+          const infoWidow = new google.maps.InfoWindow();
+
           this.selectedLocations().forEach((location) => {
             if (location.coordinate.lat >= center.max.lat) {
               center.max.lat = location.coordinate.lat;
@@ -156,7 +158,24 @@ export class HomePage implements AfterViewInit {
                   borderColor: 'transparent',
                 },
               })
-              .then((marker) => this.markers.push(marker));
+              .then((marker) => {
+                marker.addListener('click', () => {
+                  const distance =
+                    google.maps.geometry.spherical.computeDistanceBetween(
+                      this.currentLocation() as google.maps.LatLngLiteral,
+                      location.coordinate,
+                    );
+                  infoWidow.setContent(
+                    `${location.name} (${distance.toFixed(1)} meters from your current location)`,
+                  );
+                  infoWidow.open({
+                    map: marker.map,
+                    anchor: marker,
+                  });
+                });
+
+                this.markers.push(marker);
+              });
 
             this.directions.push();
             this.mapService
@@ -179,7 +198,7 @@ export class HomePage implements AfterViewInit {
   ngOnInit() {
     this.mapService.loadMap({
       id: 'UB',
-      libraries: ['places', 'marker'],
+      libraries: ['places', 'marker', 'geometry'],
     });
   }
 
