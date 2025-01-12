@@ -4,13 +4,15 @@
       class="grid mobile:grid-cols-3 tablet:grid-cols-5 laptop:grid-cols-7 desktop:grid-cols-9 gap-x-6 gap-y-10 w-full px-3 tablet:px-8 *:cursor-pointer"
     >
       @for (category of categories | keyvalue; track category.key) {
-        <app-category-card
-          [color]="category.value.color"
-          [text]="category.value.name"
-          [icon]="category.value.icon"
-          (click)="categoryChange.emit(category.key)"
-          (click)="show.set(false)"
-        />
+        @if (category.key !== "default") {
+          <app-category-card
+            [color]="category.value.color"
+            [text]="category.value.name"
+            [icon]="category.value.icon"
+            (click)="categoryChange.emit(category.key)"
+            (click)="show.set(false)"
+          />
+        }
       }
     </div>
   </div>
