@@ -1,9 +1,19 @@
 {
   "categories": {
+    "default": {
+      "name": "No Icon",
+      "icon": "icon-[mdi--help]",
+      "color": "gray-500"
+    },
     "canteen": {
       "name": "canteen",
       "icon": "icon-[mdi--restaurant]",
       "color": "orange-500"
+    },
+    "drinking-spot": {
+      "name": "drinking spot",
+      "icon": "icon-[game-icons--tap]",
+      "color": "blue-300"
     },
     "office": {
       "name": "office",
@@ -77,7 +87,7 @@
     },
     "shuttle": {
       "name": "shuttle",
-      "icon": "icon-[ic--baseline-holiday-village]",
+      "icon": "icon-[pepicons-pencil--taxi]",
       "color": "teal-300"
     }
   },
@@ -137,6 +147,15 @@
       }
     },
     {
+      "name": "G Block",
+      "block": "G Block",
+      "category": "classroom-block",
+      "coordinate": {
+        "lat": 4.1503049,
+        "lng": 9.2836853
+      }
+    },
+    {
       "name": "G119",
       "block": "G Block",
       "category": "classroom",
@@ -183,7 +202,7 @@
     },
     {
       "name": "UB girls Hostel",
-      "block": "U Block",
+      "block": "UB Resident",
       "category": "ub-hostel",
       "coordinate": {
         "lat": 4.1581375,
@@ -192,8 +211,8 @@
     },
     {
       "name": "faculty of science",
-      "block": "",
-      "category": "classroom",
+      "block": "Faculty of Science",
+      "category": "faculty",
       "coordinate": {
         "lat": 4.1509,
         "lng": 9.284911
@@ -201,8 +220,8 @@
     },
     {
       "name": "Unesco building",
-      "block": "administrative",
-      "category": "office",
+      "block": "Unesco Building",
+      "category": "faculty",
       "coordinate": {
         "lat": 4.148682,
         "lng": 9.28465
@@ -210,8 +229,8 @@
     },
     {
       "name": "library",
-      "block": "",
-      "category": "office",
+      "block": "Library",
+      "category": "library",
       "coordinate": {
         "lat": 4.149002,
         "lng": 9.285277
@@ -220,7 +239,7 @@
     {
       "name": "IT Center",
       "block": "",
-      "category": "office",
+      "category": "administrative-block",
       "coordinate": {
         "lat": 4.147864,
         "lng": 9.288665
@@ -229,7 +248,7 @@
     {
       "name": "Faculty of Social and Management Sciences",
       "block": "administrative",
-      "category": "office",
+      "category": "faculty",
       "coordinate": {
         "lat": 4.14583,
         "lng": 9.286545
@@ -237,8 +256,8 @@
     },
     {
       "name": "ASTI",
-      "block": "",
-      "category": "office/classroom",
+      "block": "ASTI",
+      "category": "faculty",
       "coordinate": {
         "lat": 4.147494,
         "lng": 9.285575
@@ -247,7 +266,7 @@
     {
       "name": "Cultural Village",
       "block": "",
-      "category": "",
+      "category": "faculty",
       "coordinate": {
         "lat": 4.146713,
         "lng": 9.285943
@@ -256,7 +275,7 @@
     {
       "name": "FHS",
       "block": "",
-      "category": "",
+      "category": "faculty",
       "coordinate": {
         "lat": 4.155533,
         "lng": 9.296054
@@ -264,8 +283,8 @@
     },
     {
       "name": "Faculty Of Engineering and Technology",
-      "block": "",
-      "category": "classroom",
+      "block": "FET Building",
+      "category": "faculty",
       "coordinate": {
         "lat": 4.143779,
         "lng": 9.28876
@@ -273,8 +292,8 @@
     },
     {
       "name": "UB Central Administration parking",
-      "block": "administrative",
-      "category": "parking",
+      "block": "",
+      "category": "administrative-block",
       "coordinate": {
         "lat": 4.148985,
         "lng": 9.288521
@@ -282,8 +301,8 @@
     },
     {
       "name": "Central Administration",
-      "block": "administrative",
-      "category": "office",
+      "block": "",
+      "category": "administrative-block",
       "coordinate": {
         "lat": 4.149024,
         "lng": 9.287876
