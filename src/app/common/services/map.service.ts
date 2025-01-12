@@ -50,30 +50,25 @@ export class MapService {
     this.map?.setCenter(center);
   }
 
-  showDirection(
+  async showDirection(
     from: google.maps.LatLngLiteral,
     to: google.maps.LatLngLiteral,
   ) {
-    if (!this.directionService || !this.directionRenderer) {
-      this.directionService = new google.maps.DirectionsService();
-      this.directionRenderer = new google.maps.DirectionsRenderer({
-        map: this.map,
-      });
-    }
+    const directionService = new google.maps.DirectionsService();
+    const directionRenderer = new google.maps.DirectionsRenderer({
+      map: this.map,
+    });
 
-    this.directionService.route(
-      {
+    return directionService
+      .route({
         origin: from,
         destination: to,
-        travelMode: google.maps.TravelMode.DRIVING,
-      },
-      (result, status) => {
-        if (status === google.maps.DirectionsStatus.OK) {
-          this.directionRenderer.setDirections(result);
-        } else {
-          console.error('Error fetching directions', result);
-        }
-      },
-    );
+        travelMode: google.maps.TravelMode.WALKING,
+      })
+      .then((response) => {
+        directionRenderer.setDirections(response);
+
+        return directionRenderer;
+      });
   }
 }

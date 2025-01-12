@@ -60,6 +60,7 @@ export class HomePage implements AfterViewInit {
   menu = false;
   searching = false;
   search = '';
+  directions: Array<google.maps.DirectionsRenderer> = [];
 
   // TODO: Implement frequently visited places
   markers: Array<google.maps.marker.AdvancedMarkerElement> = [];
@@ -117,6 +118,8 @@ export class HomePage implements AfterViewInit {
             },
           };
 
+          this.removeAllMarkers();
+
           this.selectedLocations().forEach((location) => {
             if (location.coordinate.lat >= center.max.lat) {
               center.max.lat = location.coordinate.lat;
@@ -134,28 +137,13 @@ export class HomePage implements AfterViewInit {
               center.min.lng = location.coordinate.lng;
             }
 
-            if (this.selectedLocations()?.length == 1) {
-              center.max = {
-                lng: location.coordinate.lng,
-                lat: location.coordinate.lng,
-              };
-              center.min = {
-                lng: location.coordinate.lng,
-                lat: location.coordinate.lng,
-              };
-            }
-
-            this.markers.forEach((marker) => {
-              marker.map = null;
-            });
-
             const category =
               categories[location.category as keyof typeof categories] ??
               categories['default'];
             const glyph = document.createElement('div');
             glyph.classList.add('map-glyph');
             glyph.style.backgroundColor = `color-mix(in oklab, var(--color-${category?.color}) 50%, transparent)`;
-            glyph.innerHTML = `<i class="${category?.icon} text-lg pt-px" style="color: var(--color-white)" role="img" aria-hidden="true"></i>`;
+            glyph.innerHTML = `<i class="${category?.icon} text-2xl pt-px" style="color: var(--color-white)" role="img" aria-hidden="true"></i>`;
 
             this.mapService
               .addAdvancedMarker({
@@ -170,10 +158,13 @@ export class HomePage implements AfterViewInit {
               })
               .then((marker) => this.markers.push(marker));
 
-            // this.mapService.showDirection(
-            //   this.currentLocation() as google.maps.LatLngLiteral,
-            //   location.coordinate,
-            // );
+            this.directions.push();
+            this.mapService
+              .showDirection(
+                this.currentLocation() as google.maps.LatLngLiteral,
+                location.coordinate,
+              )
+              .then((direction) => this.directions.push(direction));
           });
 
           this.mapService.setCenter({
@@ -329,10 +320,12 @@ export class HomePage implements AfterViewInit {
   }
 
   removeAllMarkers() {
+    this.directions.forEach((direction) => direction.setMap(null));
     this.markers.forEach((marker) => {
       marker.map = null;
     });
 
     this.markers = [];
+    this.directions = [];
   }
 }

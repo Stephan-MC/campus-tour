@@ -39,7 +39,7 @@
             <i
               (click)="[searching = !searching, searchLocationRef?.focus()]"
               class="shrink-0"
-              [class]="categories[location.category].icon"
+              [class]="(categories[location.category]).icon"
               [style.color]="'var(--color-' + categories[location.category].color + ')'"
               role="img"
               aria-hidden="true"
