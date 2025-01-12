@@ -72,7 +72,37 @@ export class HomePage implements AfterViewInit {
     ),
   );
 
+  currentLocation = signal<google.maps.LatLngLiteral | undefined>(undefined);
+  currentLocationMarker = signal<
+    google.maps.marker.AdvancedMarkerElement | undefined
+  >(undefined);
+
   constructor() {
+    effect(() => {
+      if (this.currentLocation()) {
+        if (!this.currentLocationMarker()) {
+          const glyph = document.createElement('div');
+          glyph.innerHTML = `<i class="icon-[mdi--map-marker-account-outline] text-lg pt-px text-primary" role="img" aria-hidden="true"></i>`;
+
+          this.mapService
+            .addAdvancedMarker({
+              position: this.currentLocation(),
+              title: 'Your current Position',
+              pin: {
+                glyph,
+                glyphColor: 'var(--color-primary)',
+                background: 'transparent',
+              },
+            })
+            .then(this.currentLocationMarker.set);
+        } else {
+          (
+            this.currentLocationMarker() as google.maps.marker.AdvancedMarkerElement
+          ).position = this.currentLocation();
+        }
+      }
+    });
+
     effect(() => {
       if (this.selectedLocations().length > 0) {
         const center = {
@@ -228,17 +258,9 @@ export class HomePage implements AfterViewInit {
           const glyph = document.createElement('div');
           glyph.innerHTML = `<i class="icon-[mdi--map-marker-account-outline] text-lg pt-px text-primary" role="img" aria-hidden="true"></i>`;
 
-          this.mapService.addAdvancedMarker({
-            position: {
-              lng: position.coords.longitude,
-              lat: position.coords.latitude,
-            },
-            title: 'Your current Position',
-            pin: {
-              glyph,
-              glyphColor: 'var(--color-primary)',
-              background: 'transparent',
-            },
+          this.currentLocation.set({
+            lng: position.coords.longitude,
+            lat: position.coords.latitude,
           });
         },
         (error) => {
